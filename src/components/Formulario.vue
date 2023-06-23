@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="box formulario">
         <div class="columns">
             <div class="column is-7" role="form" aria-label="Formulário para criação de uma nova tarefa">
                 <input v-model="descricao" type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
@@ -29,7 +29,7 @@ export default defineComponent({
     methods: {
         finalizarTarefa (tempoDecorrido) {
             this.$emit('aoSalvarTarefa', {
-                descricaEmSegundos: tempoDecorrido,
+                duracaoEmSegundos: tempoDecorrido,
                 descricao: this.descricao
             })
             this.descricao = '';
@@ -38,4 +38,9 @@ export default defineComponent({
 
 })
 </script>
-<style></style>
+<style>
+.formulario {
+    color: var(--texto-primario);
+    background-color: var(--bg-primario) o !important;
+}
+</style>

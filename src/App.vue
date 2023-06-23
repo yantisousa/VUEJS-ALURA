@@ -1,13 +1,16 @@
 <template>
-  <main class="columns is-gap is-multiline">
+  <main :class="['columns is-gap is-multiline', modoEscuro]">
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @lightMode="showLightMode " @darkMode="showDarkMode" />
     </div>
-    <div class="column is-three-quarter">
-      <Formulario @aoSalvarTarefa="salvarTarefa"/>
+    <div class="column is-three-quarter conteudo">
+      <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
-        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"/>
+        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
       </div>
+      <Box v-if="listaEstaVazia">
+        VOCÊ NÃO ESTÁ MUITO PRODUTIVO HOJE :(
+      </Box>
     </div>
   </main>
 </template>
@@ -17,21 +20,38 @@ import BarraLateral from './components/BarraLateral.vue'
 import Formulario from './components/Formulario.vue'
 import Tarefa from './components/Tarefa.vue'
 import ITarefa from './interfaces/ITarefa'
+import Box from './components/Box.vue'
 
 export default defineComponent({
   components: {
     BarraLateral,
     Formulario,
-    Tarefa
+    Tarefa,
+    Box
   },
-  data () {
+  data() {
     return {
-        tarefas: [] as ITarefa[]
+      tarefas: [] as ITarefa[],
+      modoEscuro: ''
+    }
+  },
+  computed: {
+    listaEstaVazia() {
+      return this.tarefas.length === 0;
     }
   },
   methods: {
     salvarTarefa(tarefa: ITarefa) {
+
       this.tarefas.push(tarefa);
+    },
+    showDarkMode () {
+      this.modoEscuro = 'modo-escuro';
+    },
+    showLightMode () {
+      
+      
+      this.modoEscuro = '';
     }
   }
 })
@@ -40,5 +60,16 @@ export default defineComponent({
 <style >
 .lista {
   padding: 1.2rem;
+}
+main {
+  --bg-primario: #fff;
+  --texto-primario: #000
+} 
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd
+}
+.conteudo {
+  background-color: var(--bg-primario);
 }
 </style>
