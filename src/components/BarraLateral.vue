@@ -5,6 +5,18 @@
             <button v-if="!visivel" @click="darkMode()" class="button">Dark Mode</button>
             <button v-else :style="['display:', dinamico]" @click="lightMode()" class="button">Light Mode</button>
         </h1>
+        <nav class="panel mt-5">
+            <ul >
+                <li >
+                    <router-link style="color: white !important;" to="/">Tarefas</router-link>
+                </li>
+                <li>
+
+                    <router-link style="color: white !important;" to="/projetos">Projetos</router-link>
+                </li>
+
+            </ul>
+        </nav>
     </header>
 </template>
 <script>

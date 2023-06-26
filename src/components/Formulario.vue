@@ -12,7 +12,9 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
+import { useStore } from 'vuex'
 import Temporizador from './Temporizador.vue';
+import key from '@/store'
 export default defineComponent({
     name: 'Formulário',
     emit: [
@@ -33,6 +35,12 @@ export default defineComponent({
                 descricao: this.descricao
             })
             this.descricao = '';
+        }
+    },
+    setup () {
+        const store = useStore(key)
+        return {
+            projetos: store.state.projetos
         }
     }
 

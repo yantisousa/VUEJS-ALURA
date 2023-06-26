@@ -4,30 +4,18 @@
       <BarraLateral @lightMode="showLightMode " @darkMode="showDarkMode" />
     </div>
     <div class="column is-three-quarter conteudo">
-      <Formulario @aoSalvarTarefa="salvarTarefa" />
-      <div class="lista">
-        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" />
-      </div>
-      <Box v-if="listaEstaVazia">
-        VOCÊ NÃO ESTÁ MUITO PRODUTIVO HOJE :(
-      </Box>
+      <router-view></router-view>
     </div>
   </main>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 import BarraLateral from './components/BarraLateral.vue'
-import Formulario from './components/Formulario.vue'
-import Tarefa from './components/Tarefa.vue'
 import ITarefa from './interfaces/ITarefa'
-import Box from './components/Box.vue'
 
 export default defineComponent({
   components: {
     BarraLateral,
-    Formulario,
-    Tarefa,
-    Box
   },
   data() {
     return {
