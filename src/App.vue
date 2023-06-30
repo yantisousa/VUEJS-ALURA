@@ -41,7 +41,8 @@ export default defineComponent({
       
       this.modoEscuro = '';
     }
-  }
+  },
+  
 })
 </script>
 
